@@ -9,15 +9,15 @@ import { login } from '../util/atuh';
 function LoginScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  const authCtx = useContext(AuthContext);
-
   async function loginHandler({ email, password }) {
     setIsAuthenticating(true);
     try {
-      const token = await login(email, password);
-      authCtx.authenticate(token);
+      await login(email, password);
     } catch (error) {
-      Alert.alert('Authentication failed!', "Please check your credentials or try again later");
+      Alert.alert(
+        'Authentication failed!',
+        'Could not log you in. Please check your credentials or try again later!'
+      );
     }
     setIsAuthenticating(false);
   }
